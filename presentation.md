@@ -80,22 +80,16 @@ class: center middle
 
 ---
 
-# Ice-cream cone
-
-Picture: reverse testing pyramid
-
-???
-
-- barely any unit tests
-- instead, a massive suite of incredibly flaky e2e tests, supported by around ~25 slaves retrying tests non stop
-
----
-
-class: center middle
+class: center middle side-by-side
 
 # A link to the past
 
+.col-6[
+![icecone](./images/icecone.jpg)
+]
+.col-6[
 ![pain](./images/old-jenkins.png)
+]
 
 ???
 
@@ -133,11 +127,6 @@ class: transition
 
 ---
 
-class: center middle
-
- https://www.gocd.org/2017/05/02/what-does-pipelines-as-code-really-mean/
- 
----
 
 ```yaml
 - name: test
@@ -203,6 +192,12 @@ class: center middle
 
 ---
 
+class: center middle
+
+ https://www.gocd.org/2017/05/02/what-does-pipelines-as-code-really-mean/
+
+---
+
 class: transition
 
 # A good pipeline is maintainable
@@ -215,7 +210,8 @@ class: center middle
 
 ---
 
-- Picture: dependency map
+class: full-height paper
+background-image: url(images/dependencies.jpg)
 
 ---
 
@@ -335,13 +331,6 @@ RUN apt-get update && \
 
 class: center middle
 
-## Rely on standard tools
-### sh, sed, jq, ...
-
----
-
-class: center middle
-
 ## *Tradeoff*: Isolation and speed
 
 ---
@@ -447,23 +436,7 @@ background-image: url(images/fatstep.png)
 
 ---
 
-class: center middle
-
-## Figure out what went wrong
-
----
-
-class: center middle
-
-## Visualize dependencies
-
-???
-
-- Can your CI/CD tool make _all_ dependencies transparent?
-
----
-
-class: center middle
+class: center middle bad-practice
 
 ## Logging overdose
 
@@ -532,12 +505,6 @@ class: center middle
 
 class: full-width concourse
 background-image: url(images/containers.png)
-
----
-
-class: center middle
-
-## Don't package dependencies in the containers
 
 ---
 

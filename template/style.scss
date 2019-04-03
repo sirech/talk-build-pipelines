@@ -1,9 +1,9 @@
 // Theme
 // ---------------------------------------------------------------------------
 
-$primary          : #3F51B5;
-$secondary        : #009688;
-$tertiary         : #757575;
+$primary          : rgb(184, 13, 72);
+$secondary        : rgb(242, 151, 36);
+$tertiary         : rgb(43, 106, 108);
 $light            : #FFF;
 $dark             : #333;
 $text-dark        : #212121; 
@@ -19,6 +19,7 @@ $margin           : 20px;
 $iframe-scale     : 1.5;
 $concourse        : #3D3C3C;
 $circle           : #F5F5F5;
+$paper            : rgb(187, 170, 150);
 
 
 // CSS Base
@@ -247,6 +248,10 @@ blockquote {
   background-color: $circle;
 }
 
+.paper {
+  background-color: $paper;
+}
+
 .bad-practice {
   &, h1, h2 {
     color: red;
@@ -261,5 +266,9 @@ blockquote {
 }
 
 .remark-slide-number {
-  display: block;
+  display: none;
+}
+
+.side-by-side img {
+  width: 500px;
 }
