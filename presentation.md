@@ -12,9 +12,10 @@ class: impact
 
 ???
 
-- Do you have build pipelines for your software? Probably yes
-- Pipelines are often an afterthought, and thus of poor quality
-- How do you justify spending resources on improving pipelines?
+- two questions
+
+ - Are you building and (maybe) deploying your application through a pipeline?
+ - Are you happy with your current setup?
 
 ---
 
@@ -24,8 +25,9 @@ class: center middle
 
 ???
 
-- A pipeline is a mean to an end
-- end goal is delivering software quickly, safely, in a sustainable way
+- It is really hard to do CD with a bad setup. It is possible, but it is hard
+- End goal is delivering software quickly, safely, in a sustainable way
+- a pipeline is a technical artifact, but this is a business goal
 
 ---
 
@@ -60,13 +62,17 @@ class: middle
 
 ???
 
-- Arguably every metric benefits from a solid pipeline, but these two are particularly so
+- An automated, high quality pipeline can have a direct, measurable impact in these two
 
 ---
 
 class: transition
 
 # Before we talk about pipelines...
+
+???
+
+- Big disclaimer
 
 ---
 
@@ -76,7 +82,7 @@ class: center middle
 
 ???
 
-- Before moving to how to build pipelines better, I want to talk about my first experience implementing CD 
+- If your processes are broken, if your software is not good, putting a pipeline in front will only allow you to deliver crap faster
 
 ---
 
@@ -107,6 +113,10 @@ class: transition
 
 class: full-width
 background-image: url(images/pipeline.png)
+
+???
+
+- Reality is messy, it never looks as good as a nice picture
 
 ---
 
@@ -167,6 +177,10 @@ jobs:
       - run: yarn test --coverage --runInBand
 ```
 
+???
+
+- Having a representation as code is *not* enough
+
 ---
 
 class: bad-practice center middle
@@ -179,6 +193,10 @@ class: center middle
 
 ## Keep it close to the app
 
+???
+
+- Antipattern: External repo with all the pipelines (maybe even not owned by the team that builds that app)
+
 ---
 
 class: center middle
@@ -188,7 +206,7 @@ class: center middle
 ???
 
 - goes without saying
-- has a second meaning: don't export it from somewhere else and put in a repo
+- bad example: apigee (xml)
 
 ---
 
@@ -213,6 +231,14 @@ class: center middle
 class: full-height paper
 background-image: url(images/dependencies.jpg)
 
+???
+
+- Pipeline should have a very specific purpose
+
+ - define dependencies between tasks
+ - define constraints for these tasks
+ - define a script to be run in order to get the correct output
+
 ---
 
 class: center middle
@@ -221,6 +247,8 @@ class: center middle
 
 ???
 
+- Flexibility comes at a cost
+- Testing a pipeline outside the CI tool is notoriously difficult
 - Current project had a _Gradle_ based DSL that was basically impossible to test
 
 ---
@@ -232,7 +260,7 @@ class: center middle
 
 ???
 
-- There are always limits. Doing a deployment might not be something you want to do locally
+- Why? To avoid doing Hope Driven Development
 
 ---
 
@@ -255,6 +283,11 @@ usage: ./go <goal>
 
   build                    -- Build the bundle
 ```
+
+???
+
+- Targets of the `go` script are used in the pipeline, and can be run locally as well
+- There are always limits. Doing a deployment might not be something you want to do locally
 
 ---
 
@@ -288,6 +321,11 @@ gradle_with_credentials() {
 class: transition
 
 # A good pipeline is reliable
+
+???
+
+- Green means good to go
+- Red means somebody has to take a look, right now
 
 ---
 
@@ -339,6 +377,11 @@ class: center middle
 
 ## Beware of external systems
 
+???
+
+- Any external system is a risk, moreso if you don't control it
+- Canonical example: Flaky end to end tests
+
 ---
 
 class: transition
@@ -383,8 +426,11 @@ background-image: url(images/parallel.png)
 
 class: center middle
 
-## Order of execution
-### Avoid repeating steps
+## Avoid repeating steps
+
+???
+
+- are you building multiple artifacts?
 
 ---
 
@@ -394,6 +440,7 @@ class: center middle
 
 ???
 
+- As mentioned: tradeoff between isolation and speed
 - Caching and avoiding repetition are not the same thing
 
 ---
@@ -416,6 +463,10 @@ caches:
 params:
   GRADLE_USER_HOME: ../gradle
 ```
+
+???
+
+- only works if the versions of your dependencies are locked
 
 ---
 
@@ -447,6 +498,12 @@ background-image: url(images/logging.png)
 
 ---
 
+class: center middle
+
+## Visualize dependencies
+
+---
+
 class: transition
 
 # A good pipeline is scalable
@@ -462,6 +519,10 @@ class: center middle
 
 ## *Tradeoff*: Reuse vs Coupling
 
+???
+
+- Tough question to answer, as it can really depend on a particular situation
+
 ---
 
 class: center middle
@@ -473,6 +534,10 @@ class: center middle
 class: center middle
 
 ## Parametrized steps
+
+???
+
+- When talking about maintainability, I said don't use a programming language. That does not mean you cannot use things that allow reuse
 
 ---
 
